@@ -57,7 +57,12 @@ export default function Home() {
           Powered by{' '}
           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
+        
       </footer>
+
+      <script src="https://js.braintreegateway.com/web/3.85.3/js/client.min.js"></script>
+      <script src="https://js.braintreegateway.com/web/3.85.3/js/paypal-checkout.min.js"></script>
+      <script src="https://js.braintreegateway.com/web/3.85.3/js/apple-pay.min.js"></script>
 
       <style jsx>{`
         .container {
