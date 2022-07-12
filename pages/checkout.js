@@ -48,6 +48,11 @@ export default function Home() {
       });
     };
 
+    session.oncancel = function (event) {
+      // Payment cancelled by WebKit
+      console.log('apple pay session cancelled', event); // eslint-disable-line
+    };
+
     session.begin();
   }
 
