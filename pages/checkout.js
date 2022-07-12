@@ -13,7 +13,7 @@ export default function Home() {
     }
     
     braintree.client.create({
-      authorization: 'CLIENT_AUTHORIZATION'
+      authorization: 'sandbox_v2kb9c6b_zgvjvhdq4mxznj66'
     }, function (clientErr, clientInstance) {
       if (clientErr) {
         console.error('Error creating client:', clientErr);
