@@ -91,11 +91,11 @@ export default function Home() {
             amount: '19.99'
           },
           merchantCapabilities: ['supports3DS','supportsDebit', 'supportsCredit', 'supportsEMV'],
-          supportedNetworks: ["visa", "masterCard", "amex", "discover", "chinaUnionPay"]
+          supportedNetworks: ["visa", "masterCard", "amex", "discover", "chinaUnionPay"],
           // We recommend collecting billing address information, at minimum
           // billing postal code, and passing that billing postal code with
           // all Apple Pay transactions as a best practice.
-          //requiredBillingContactFields: ["postalAddress"]
+          requiredBillingContactFields: ["postalAddress"]
         });
         console.log(paymentRequest);
         console.log(paymentRequest.countryCode);
