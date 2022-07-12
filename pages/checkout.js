@@ -93,6 +93,7 @@ export default function Home() {
           // all Apple Pay transactions as a best practice.
           //requiredBillingContactFields: ["postalAddress"]
         });
+        console.log(paymentRequest);
         console.log(paymentRequest.countryCode);
         console.log(paymentRequest.currencyCode);
         console.log(paymentRequest.merchantCapabilities);
