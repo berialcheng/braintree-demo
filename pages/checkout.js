@@ -43,7 +43,7 @@ export default function Home() {
     
         // If requested, address information is accessible in event.payment
         // and may also be sent to your server.
-        console.log('billingPostalCode:', event.payment.billingContact.postalCode);
+        console.log('billingPostalCode:', event.payment.billingContact);
     
         // After you have transacted with the payload.nonce,
         // call `completePayment` to dismiss the Apple Pay sheet.
@@ -91,11 +91,11 @@ export default function Home() {
             amount: '19.99'
           },
           merchantCapabilities: ['supports3DS','supportsDebit', 'supportsCredit', 'supportsEMV'],
-          supportedNetworks: ["visa", "masterCard", "amex", "discover", "chinaUnionPay"],
+          supportedNetworks: ["visa", "masterCard", "amex", "discover", "chinaUnionPay"]
           // We recommend collecting billing address information, at minimum
           // billing postal code, and passing that billing postal code with
           // all Apple Pay transactions as a best practice.
-          requiredBillingContactFields: ["postalAddress"]
+          //requiredBillingContactFields: ["postalAddress"]
         });
         console.log(paymentRequest);
         console.log(paymentRequest.countryCode);
