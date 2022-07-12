@@ -11,7 +11,10 @@ export default function Home() {
 
     session.onvalidatemerchant = function (event) {
       applePayInstance1.performValidation({
-        validationURL: event.validationURL,
+        //validationURL: event.validationURL,
+        validationURL: "https://apple-pay-gateway-cert.apple.com/paymentservices/startSession",
+        //event.validationURL,
+        merchantIdentifier: "merchant.com.braintree.BookingB2C.test",
         displayName: 'My Store'
       }, function (err, merchantSession) {
         if (err) {
