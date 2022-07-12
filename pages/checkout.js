@@ -113,7 +113,7 @@ export default function Home() {
           <br/>
           <Button type="primary" onClick={handleClick}>Initialization</Button>
           <Button type="primary" onClick={handleApplePayClick}>Apple Pay</Button>
-          <Button type="primary">Test Transaction</Button>
+          {/* <Button type="primary">Test Transaction</Button> */}
       </div>
     </div>
   )
