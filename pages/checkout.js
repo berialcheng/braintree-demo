@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { Button, InputNumber, Space, DatePicker, Card } from 'antd';
-import { ApplePayButton } from './components/ApplePayButton';
+import ApplePayButton from './components/ApplePayButton';
 
 const defaultAmount = 1;
 let applePayInstance1;

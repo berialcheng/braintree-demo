@@ -7,4 +7,4 @@ const ApplePayButton = ({ onClick }) => (
     />
 );
 
-export { ApplePayButton };
+export default ApplePayButton;
