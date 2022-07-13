@@ -8,6 +8,10 @@ let applePayInstance1;
 export default function Home() {
   const [amount, setAmount] = useState(defaultAmount);
 
+  const handleAmountChange = (value) => {
+    setAmount(value);
+  };
+
   const handleApplePayClick = () => {
     const paymentRequest = applePayInstance1.createPaymentRequest({
       total: {
@@ -128,6 +132,7 @@ export default function Home() {
               defaultValue={defaultAmount}
               min="0"
               value={amount}
+              onChange={handleAmountChange}
           />
           <br/>
           {/* <Button type="primary" onClick={handleApplePayClick}>Apple Pay</Button> */}
