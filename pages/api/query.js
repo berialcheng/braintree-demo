@@ -17,7 +17,6 @@ export default async function handler(req, res) {
                     list.push(transaction)  
                 })
             })
-            await eachTransactions;
             console.log(list)
             if(err) {
                 res.status(500).json(err)
