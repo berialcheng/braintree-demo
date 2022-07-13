@@ -25,6 +25,9 @@ export default function Home() {
     console.log('data', payload);
     const response = await window.fetch('/api/transaction', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(payload),
     })
     const { status } = response;
