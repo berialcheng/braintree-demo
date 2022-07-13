@@ -14,6 +14,13 @@ const exampleApplePayConfig = {
   merchantCapabilities: ['supports3DS', 'supportsCredit', 'supportsDebit', 'supportsEMV'],
   merchantIdentifier: 'merchant.com.braintree.BookingB2C.test',
 };
+const ShowcaseNotice = (
+  <div>
+    1. Please visit the website via <strong>Safari</strong> browser. <br />
+    2. To make a successful payment, please log into your iOS/MacOS device with <a href="https://developer.apple.com/apple-pay/sandbox-testing/" target="_blank" rel="noopener noreferrer">Apple Pay sandbox tester account</a>.
+  </div>
+);
+
 let applePayInstance1;
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -229,6 +236,13 @@ export default function Home() {
           </div>
         )}
         <ApplePayButton onClick={handleApplePayClick} />
+      </div>
+      <div className="notice-container">
+        <Alert
+          message="Things you should know"
+          description={ShowcaseNotice}
+          type="info"
+        />
       </div>
     </div>
   )

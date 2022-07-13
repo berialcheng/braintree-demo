@@ -13,6 +13,10 @@
     line-height: 24px;
 }
 
+.notice-container {
+    margin-top: 24px;
+}
+
 .apple-pay-button {
     cursor: pointer;
 }
