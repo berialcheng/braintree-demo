@@ -38,6 +38,18 @@ export default function Home() {
     try {
       const responseData = await response.json();
       console.log(responseData);
+      const { message, success } = (responseData || {});
+      if (!success) {
+        setAlertMessage({
+          type: 'error',
+          message,
+        });
+        return;
+      }
+      setAlertMessage({
+        type: 'success',
+        message: 'Congrats! The payment is successful via Apple Pay.',
+      });
     } catch (error) {
       setAlertMessage({
         type: 'error',
