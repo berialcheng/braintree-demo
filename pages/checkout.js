@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 import { Button, InputNumber, Space, DatePicker, Card } from 'antd';
 import ApplePayButton from './components/ApplePayButton';
 
-import '../styles/styles.css';
-
 const defaultAmount = 1;
 let applePayInstance1;
 export default function Home() {
