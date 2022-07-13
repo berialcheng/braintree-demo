@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { InputNumber, Alert } from 'antd';
+import client from 'braintree-web/client';
+import applePay from 'braintree-web/apple-pay';
 import ApplePayButton from './components/ApplePayButton';
 
 const defaultAmount = 1;
@@ -171,7 +173,7 @@ export default function Home() {
       return;
     }
 
-    braintree.client.create({
+    client.create({
       authorization: exampleApplePayConfig.token,
     }, function (clientErr, clientInstance) {
       if (clientErr) {
@@ -179,7 +181,7 @@ export default function Home() {
         return;
       }
 
-      braintree.applePay.create({
+      applePay.create({
         client: clientInstance
       }, function (applePayErr, applePayInstance) {
         if (applePayErr) {
@@ -200,9 +202,6 @@ export default function Home() {
 
   return (
     <div className="app">
-      <script src="https://js.braintreegateway.com/web/3.85.3/js/client.min.js"></script>
-      <script src="https://js.braintreegateway.com/web/3.85.3/js/paypal-checkout.min.js"></script>
-      <script src="https://js.braintreegateway.com/web/3.85.3/js/apple-pay.min.js"></script>
       <div className="container">
         <InputNumber
           addonBefore="$"
