@@ -208,8 +208,8 @@ export default function Home() {
           <div className="lpm-instruction-container">
             <h2 className="lpm-instruction-title">Here's what happens next</h2>
             <ul className="lpm-instructions">
-              <li>You'll be redirected to Apple Pay.</li>
-              <li>Make sure you complete all the steps with Apple Pay.</li>
+              <li>Apple Pay payment sheet will be invoked.</li>
+              <li>Make sure you complete all the steps with Apple Pay (on iPhone device nearby).</li>
               <li>You'll receive confirmation after you've paid.</li>
             </ul>
           </div>
