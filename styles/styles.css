@@ -1,8 +1,18 @@
 /* @import "~antd/dist/antd.css"; */
 
-/* .App {
-    padding: 20px;
-} */
+.app {
+    padding: 16px;
+}
+
+.lpm-instruction-container,
+.lpm-message-container {
+    margin: 12px 0;
+}
+.lpm-instruction-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+}
 
 .apple-pay-button {
     cursor: pointer;
