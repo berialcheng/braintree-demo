@@ -1,15 +1,36 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import { useState, useEffect } from 'react';
 import { Button, InputNumber, Space, DatePicker, Card } from 'antd';
+import { ApplePayButton } from './components/ApplePayButton';
 
-let paymentRequest;
+const defaultAmount = 1;
 let applePayInstance1;
 export default function Home() {
-  
+  const [amount, setAmount] = useState(defaultAmount);
 
-  function handleApplePayClick () {
+  const handleApplePayClick = () => {
+    const paymentRequest = applePayInstance1.createPaymentRequest({
+      total: {
+        label: 'My Store',
+        amount,
+        type: 'final'
+      },
+      merchantCapabilities: ['supports3DS','supportsDebit', 'supportsCredit', 'supportsEMV'],
+      supportedNetworks: ["visa", "masterCard", "amex", "discover", "chinaUnionPay"]
+      // We recommend collecting billing address information, at minimum
+      // billing postal code, and passing that billing postal code with
+      // all Apple Pay transactions as a best practice.
+      //requiredBillingContactFields: ["postalAddress"]
+    });
+    console.log(paymentRequest);
+    console.log(paymentRequest.countryCode);
+    console.log(paymentRequest.currencyCode);
+    console.log(paymentRequest.merchantCapabilities);
+    console.log(paymentRequest.supportedNetworks);
     var session = new ApplePaySession(3, paymentRequest);
 
     session.onvalidatemerchant = function (event) {
+      console.log('onvalidatemerchant', event);
       applePayInstance1.performValidation({
         //validationURL: event.validationURL,
         validationURL: "https://apple-pay-gateway-cert.apple.com/paymentservices/startSession",
@@ -19,6 +40,7 @@ export default function Home() {
       }, function (err, merchantSession) {
         if (err) {
           // You should show an error to the user, e.g. 'Apple Pay failed to load.'
+          console.error('Error: Apple Pay failed to load.', err);
           return;
         }
         session.completeMerchantValidation(merchantSession);
@@ -27,7 +49,7 @@ export default function Home() {
 
 
     session.onpaymentauthorized = function (event) {
-      console.log('Your shipping address is:', event.payment.shippingContact);
+      console.log('onpaymentauthorized', event);
     
       applePayInstance1.tokenize({
         token: event.payment.token
@@ -59,17 +81,18 @@ export default function Home() {
     session.begin();
   }
 
-  function handleClick() {
+  function initializeApplePay() {
     if (!window.ApplePaySession) {
       console.error('This device does not support Apple Pay');
+      return;
     }
     
     if (!ApplePaySession.canMakePayments()) {
       console.error('This device is not capable of making Apple Pay payments');
+      return;
     }
     
     braintree.client.create({
-      //authorization: 'sandbox_v2kb9c6b_zgvjvhdq4mxznj66'
       authorization: 'sandbox_w39fvdk4_th5v3d27kbgwmy93'
     }, function (clientErr, clientInstance) {
       if (clientErr) {
@@ -85,29 +108,13 @@ export default function Home() {
           return;
         }
         applePayInstance1 = applePayInstance;
-    
-        paymentRequest = applePayInstance.createPaymentRequest({
-          total: {
-            label: 'My Store',
-            amount: '19.99'
-          },
-          merchantCapabilities: ['supports3DS','supportsDebit', 'supportsCredit', 'supportsEMV'],
-          supportedNetworks: ["visa", "masterCard", "amex", "discover", "chinaUnionPay"]
-          // We recommend collecting billing address information, at minimum
-          // billing postal code, and passing that billing postal code with
-          // all Apple Pay transactions as a best practice.
-          //requiredBillingContactFields: ["postalAddress"]
-        });
-        console.log(paymentRequest);
-        console.log(paymentRequest.countryCode);
-        console.log(paymentRequest.currencyCode);
-        console.log(paymentRequest.merchantCapabilities);
-        console.log(paymentRequest.supportedNetworks);
-        
-       
       });
     });
   }
+
+  useEffect(() => {
+    initializeApplePay();
+  }, []);
 
   return (
     <div>
@@ -118,12 +125,13 @@ export default function Home() {
       <div className="container">
           <InputNumber
               style={{ width: 200 }}
-              defaultValue="1"
+              defaultValue={defaultAmount}
               min="0"
+              value={amount}
           />
           <br/>
-          <Button type="primary" onClick={handleClick}>Initialization</Button>
-          <Button type="primary" onClick={handleApplePayClick}>Apple Pay</Button>
+          {/* <Button type="primary" onClick={handleApplePayClick}>Apple Pay</Button> */}
+          <ApplePayButton onClick={handleApplePayClick} />
           {/* <Button type="primary">Test Transaction</Button> */}
       </div>
     </div>
