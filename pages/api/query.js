@@ -7,12 +7,15 @@ const gateway = braintree.connect({
   privateKey:   '1a6656f87fa1eeb51a31dd030c1f1f7b'
 });
 
-
 export default function handler(req, res) {
     const stream = gateway.transaction.search((search) => {}, (err, response) => {
-        response.each((err, transaction) => {
-            console.log(transaction);
-        });
+        // response.each((err, transaction) => {
+        //     console.log(transaction);
+        // });
+        if(err) {
+            res.status(500).json(err)
+        } else {
+            res.status(200).json(response)
+        }
     });
-    res.status(200).json(stream)
 }

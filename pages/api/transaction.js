@@ -19,5 +19,10 @@ export default function handler(req, res) {
       //postalCode: postalCodeFromTheClient
     //}
   }, (err, result) => {
+    if(err) {
+      res.status(500).json(err)
+    } else {
+      res.status(200).json(result)
+    }
   });
 }
