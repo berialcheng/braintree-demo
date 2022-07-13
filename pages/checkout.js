@@ -14,6 +14,7 @@ const exampleApplePayConfig = {
 };
 let applePayInstance1;
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
   const [amount, setAmount] = useState(defaultAmount);
   const [{ message, type }, setAlertMessage] = useState({});
 
@@ -191,8 +192,11 @@ export default function Home() {
   }
 
   useEffect(() => {
+    setMounted(true);
     initializeApplePay();
   }, []);
+
+  if (!mounted) { return null; }
 
   return (
     <div className="app">
@@ -200,32 +204,32 @@ export default function Home() {
       <script src="https://js.braintreegateway.com/web/3.85.3/js/paypal-checkout.min.js"></script>
       <script src="https://js.braintreegateway.com/web/3.85.3/js/apple-pay.min.js"></script>
       <div className="container">
-          <InputNumber
-              addonBefore="$"
-              style={{ width: 200 }}
-              defaultValue={defaultAmount}
-              min="0"
-              value={amount}
-              onChange={handleAmountChange}
-          />
-          <div className="lpm-instruction-container">
-            <h2 className="lpm-instruction-title">Here's what happens next</h2>
-            <ul className="lpm-instructions">
-              <li>Apple Pay payment sheet will be invoked.</li>
-              <li>Make sure you complete all the steps with Apple Pay (on iPhone device nearby).</li>
-              <li>You'll receive confirmation after you've paid.</li>
-            </ul>
+        <InputNumber
+          addonBefore="$"
+          style={{ width: 200 }}
+          defaultValue={defaultAmount}
+          min="0"
+          value={amount}
+          onChange={handleAmountChange}
+        />
+        <div className="lpm-instruction-container">
+          <h2 className="lpm-instruction-title">Here's what happens next</h2>
+          <ul className="lpm-instructions">
+            <li>Apple Pay payment sheet will be invoked.</li>
+            <li>Make sure you complete all the steps with Apple Pay (on iPhone device nearby).</li>
+            <li>You'll receive confirmation after you've paid.</li>
+          </ul>
+        </div>
+        {(message) && (
+          <div className="lpm-message-container">
+            <Alert
+              message={message}
+              type={type}
+              closable
+            />
           </div>
-          {(message) && (
-            <div className="lpm-message-container">
-              <Alert
-                message={message}
-                type={type}
-                closable
-              />
-            </div>
-          )}
-          <ApplePayButton onClick={handleApplePayClick} />
+        )}
+        <ApplePayButton onClick={handleApplePayClick} />
       </div>
     </div>
   )
