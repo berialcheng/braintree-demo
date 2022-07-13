@@ -12,6 +12,7 @@
     "next": "^10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "braintree": "^3.11.0"
+    "braintree": "^3.11.0",
+    "streams": "^0.0.9"
   }
 }
