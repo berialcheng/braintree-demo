@@ -14,4 +14,5 @@ export default function handler(req, res) {
             console.log(transaction);
         });
     });
+    res.status(200).json(stream)
 }
