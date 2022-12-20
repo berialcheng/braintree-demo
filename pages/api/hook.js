@@ -6,7 +6,8 @@ export default function handler(req, res) {
     if (req.body && req.body.notificationItems) {
         var notificationItems = req.body.notificationItems;
         notificationItems.map(n => {
-            return n
+            console.log("eventCode", n.NotificationRequestItem.eventCode)
+            return n.NotificationRequestItem.eventCode
         })
     }
 
